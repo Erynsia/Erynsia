@@ -13,8 +13,13 @@ check_domains() {
             continue  # Skip empty lines
         fi
         url="http://$domain"
-        status_code=$(curl -s -o /dev/null -w "%{http_code}" "$url")
-        if [ "$status_code" == "200" ]; then
+        
+        # Use curl with --max-time 5 to timeout after 5 seconds
+        status_code=$(curl -s --max-time 5 -o /dev/null -w "%{http_code}" "$url")
+        
+        if [ $? -ne 0 ]; then
+            echo -e "${domain}: ${RED}Connection Error${RESET}"
+        elif [ "$status_code" == "200" ]; then
             echo -e "${domain}: ${GREEN}${status_code} OK${RESET}"
         elif [ "$status_code" == "404" ]; then
             echo -e "${domain}: ${RED}${status_code} Not Found${RESET}"
