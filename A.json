@@ -54,7 +54,7 @@
       },
       {
         "domain_suffix": [
-          "vmess-rs-us02.globalssh.xyz"
+          "care.pmang.game.naver.com"
         ],
         "server": "direct-dns",
         "rewrite_ttl": 20
@@ -118,44 +118,31 @@
       "tag": "Internet",
       "outbounds": [
         "Best Latency",
-        "Qwehi-globalssh_vmess_ws_tls"
+        "backup"
       ]
     },
     {
       "type": "urltest",
       "tag": "Best Latency",
       "outbounds": [
-        "Qwehi-globalssh_vmess_ws_tls"
+        "backup"
       ],
       "url": "https://detectportal.firefox.com/success.txt",
       "interval": "1m0s"
     },
     {
-      "tag": "Qwehi-globalssh_vmess_ws_tls",
-      "type": "vmess",
-      "server": "vmess-rs-us02.globalssh.xyz",
-      "server_port": 443,
-      "uuid": "097ad26f-f4e1-45db-a343-62f60974d2a2",
-      "security": "auto",
-      "alter_id": 0,
-      "global_padding": false,
-      "authenticated_length": true,
-      "multiplex": {
-        "enabled": false,
-        "protocol": "smux",
-        "max_streams": 32
-      },
-      "tls": {
-        "enabled": true,
-        "server_name": "static.seabank.co.id",
-        "insecure": true,
-        "disable_sni": false
-      },
+      "tag": "backup",
+      "type": "vless",
+      "server": "care.pmang.game.naver.com",
+      "server_port": 80,
+      "uuid": "47f5ab29-37cb-4f1a-8638-765c59774836",
+      "flow": "",
+      "packet_encoding": "xudp"
       "transport": {
         "type": "ws",
-        "path": "/vmess-ws",
+        "path": "/vless",
         "headers": {
-          "Host": "static.seabank.co.id"
+          "Host": "sg.vless.sbs"
         },
         "max_early_data": 0,
         "early_data_header_name": "Sec-WebSocket-Protocol"
